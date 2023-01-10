@@ -16,23 +16,51 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include QMK_KEYBOARD_H
 
+enum layer_names {
+    _BASE, // Default Layer
+    _FN, // Fn Layer 1
+    _FN2, // Fn Layer 2
+    _FN3 // Fn Layer 3
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* DEFAULT */
-	LAYOUT_numpad_5x4(
-		MO(1), KC_PAST, KC_PSLS, KC_PMNS,
-		KC_P7, KC_P8, KC_P9, 
+	[_BASE] = LAYOUT_ortho_5x4(
+		MO(1), KC_PSLS, KC_PAST, KC_BSPC,
+		KC_P7, KC_P8, KC_P9, KC_MINS, 
 		KC_P4, KC_P5, KC_P6, KC_PPLS,
-		KC_P1, KC_P2, KC_P3,
-		       KC_P0, KC_PDOT, KC_PENT), 
+		KC_P1, KC_P2, KC_P3, KC_EQL,
+		KC_P0, KC_P0, KC_PDOT, KC_PENT), 
 
     /* FUNCTION */
-	LAYOUT_numpad_5x4(
+    [_FN] = LAYOUT_ortho_5x4(
 		KC_TRNS, RGB_TOG, RGB_MOD, KC_TRNS,
-        RGB_HUI, RGB_SAI, RGB_VAI,
+        RGB_HUI, RGB_SAI, RGB_VAI, KC_TRNS,
         RGB_HUD, RGB_SAD, RGB_VAD, KC_TRNS,
-		KC_TRNS, KC_TRNS, KC_TRNS,
-		         KC_TRNS, QK_BOOT, KC_NUM)
+		KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+		KC_TRNS, KC_TRNS, QK_BOOT,   KC_NUM),
+    
+    /* FUNCTION */
+    [_FN2] = LAYOUT_ortho_5x4(
+		_______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______),
+
+    /* FUNCTION */
+    [_FN3] = LAYOUT_ortho_5x4(
+		_______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______,
+        _______, _______, _______, _______)
 };
 
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [_BASE] =   {  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [_FN] =  {  ENCODER_CCW_CW(RGB_SAD, RGB_SAI)  },
+    [_FN2] =  {  ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
+    [_FN3] = {  ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
+};

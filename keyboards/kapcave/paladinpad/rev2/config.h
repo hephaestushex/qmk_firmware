@@ -22,9 +22,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS { F4, F6, D7, B4, D6 }
 #define MATRIX_COL_PINS { F7, F5, D3, B7 }
 
+/*Encoders*/
+#define ENCODERS_PAD_A { F4 } 
+#define ENCODERS_PAD_B { F7 } 
+
+#define ENCODER_RESOLUTION 2
+
+#define ENCODER_DIRECTION_FLIP
+
+#define ENCODER_MAP_KEY_DELAY 10
+
 #define AUDIO_PIN C6
 
 #define RGB_DI_PIN D0
+
 
 #ifdef RGB_DI_PIN
 #define RGBLIGHT_EFFECT_BREATHING
